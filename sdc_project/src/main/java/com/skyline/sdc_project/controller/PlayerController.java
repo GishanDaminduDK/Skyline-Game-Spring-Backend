@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173") // Allow requests from localhost:5173
 @RequestMapping("api/v1/player")
 public class PlayerController {
 
@@ -50,6 +51,7 @@ public class PlayerController {
             return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @PutMapping(value = "/updatePlayer")
     public ResponseEntity updatePlayer(@RequestBody PlayerDTO playerDTO){
@@ -103,11 +105,13 @@ public class PlayerController {
                 responseDTO.setCode(VarList.RSP_SUCCESS);
                 responseDTO.setMessage("Success");
                 responseDTO.setContent(playerDTO);
+                responseDTO.setAuthenticate("true");
                 return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
             } else {
                 responseDTO.setCode(VarList.RSP_NO_DATA_FOUND);
                 responseDTO.setMessage("No Player Available For this playerID");
                 responseDTO.setContent(null);
+                responseDTO.setAuthenticate("false");
                 return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {

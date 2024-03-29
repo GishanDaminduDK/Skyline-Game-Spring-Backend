@@ -63,4 +63,8 @@ public class PlayerService {
             return VarList.RSP_NO_DATA_FOUND;
         }
     }
+//    public Player findPlayerByIdAndUsername(Long playerId, String playerUsername) {
+//        // Implement this method to find a player by ID and username in your PlayerService
+//        return playerRepo.findByPlayerIdAndPlayerUsername(playerId, playerUsername);
+//    }
 }
