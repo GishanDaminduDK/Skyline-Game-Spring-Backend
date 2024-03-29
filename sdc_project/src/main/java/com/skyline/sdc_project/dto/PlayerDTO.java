@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 public class PlayerDTO {
     private int playerID;
-    private String playerName;
+    private String playerUsername;
     private String ans_1;
     private String ans_2;
     private String ans_3;
