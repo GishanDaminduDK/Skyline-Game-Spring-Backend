@@ -1,19 +1,10 @@
-package com.skyline.sdc_project.dto;
+package com.skyline.sdc_project.entity;
 
-public class LoginReq {
+public class Usercredentials {
     private String username;
     private String password;
 
-
-    public LoginReq() {
-    }
-
-    public LoginReq(String username, String password) {
-        this.username = username;
-        this.password = password;
-
-    }
-
+    // Getters and setters
     public String getUsername() {
         return username;
     }
@@ -29,6 +20,5 @@ public class LoginReq {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 }
+

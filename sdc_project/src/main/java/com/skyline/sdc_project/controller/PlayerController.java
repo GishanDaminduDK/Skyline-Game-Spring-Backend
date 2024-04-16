@@ -147,9 +147,11 @@
 //}
 package com.skyline.sdc_project.controller;
 
+import com.skyline.sdc_project.dto.PlayerAnswersDTO;
 import com.skyline.sdc_project.dto.PlayerDTO;
 import com.skyline.sdc_project.dto.ResponseDTO;
 
+import com.skyline.sdc_project.entity.Usercredentials;
 import com.skyline.sdc_project.service.PlayerServiceManagement;
 import com.skyline.sdc_project.util.VarList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,6 +163,7 @@ import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:5173") // Allow requests from localhost:5173
+@CrossOrigin(origins = "*")
 @RequestMapping("api/v1/player")
 public class PlayerController {
 
@@ -169,6 +172,12 @@ public class PlayerController {
 
     @Autowired
     private ResponseDTO responseDTO;
+    @PostMapping("/send_credentials")
+    public void login(@RequestBody Usercredentials credentials) {
+        System.out.println("Received login request");
+        System.out.println("Username: " + credentials.getUsername());
+        System.out.println("Password: " + credentials.getPassword());
+    }
 
     @PostMapping(value = "/savePlayer")
     public ResponseEntity savePlayer(@RequestBody PlayerDTO playerDTO) {
@@ -197,6 +206,57 @@ public class PlayerController {
             return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PostMapping(value="/saveAnswers")
+    public ResponseEntity savePlayerAnswers(@RequestBody PlayerAnswersDTO playerAnswersDTO) {
+        try {
+            String res = playerServiceManagement.savePlayerAnswers(playerAnswersDTO);
+            if (res.equals("00")) {
+                responseDTO.setCode(VarList.RSP_SUCCESS);
+                responseDTO.setMessage("Success");
+                responseDTO.setContent(playerAnswersDTO);
+                return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
+            } else if (res.equals("06")) {
+                responseDTO.setCode(VarList.RSP_DUPLICATED);
+                responseDTO.setMessage("Player Registered");
+                responseDTO.setContent(playerAnswersDTO);
+                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
+            } else {
+                responseDTO.setCode(VarList.RSP_FAIL);
+                responseDTO.setMessage("Error");
+                responseDTO.setContent(null);
+                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception ex) {
+            responseDTO.setCode(VarList.RSP_ERROR);
+            responseDTO.setMessage(ex.getMessage());
+            responseDTO.setContent(null);
+            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping(value="/answer/{id}")
+    public ResponseEntity getPlayerAnswers(@PathVariable("id") Integer playerId) {
+        try {
+            PlayerAnswersDTO playerAnswersDTO = playerServiceManagement.getPlayerAnswers(playerId);
+            if (playerAnswersDTO != null) {
+                responseDTO.setCode(VarList.RSP_SUCCESS);
+                responseDTO.setMessage("Success");
+                responseDTO.setContent(playerAnswersDTO);
+                return new ResponseEntity(responseDTO, HttpStatus.OK);
+            } else {
+                responseDTO.setCode(VarList.RSP_NO_DATA_FOUND);
+                responseDTO.setMessage("Player Answers not found");
+                responseDTO.setContent(null);
+                return new ResponseEntity(responseDTO, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception ex) {
+            responseDTO.setCode(VarList.RSP_ERROR);
+            responseDTO.setMessage(ex.getMessage());
+            responseDTO.setContent(null);
+            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 
 
     @PutMapping(value = "/updatePlayer")

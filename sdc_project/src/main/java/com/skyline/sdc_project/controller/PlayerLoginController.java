@@ -29,9 +29,9 @@ public class PlayerLoginController {
     @RequestMapping(value = "/log", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody LoginReq req) {
         try {
-            PlayerDTO search = service.search(req.getEmail(), req.getPassword());
+            PlayerDTO search = service.search(req.getUsername(), req.getPassword());
             String token = util.createToken(search);
-            return ResponseEntity.ok(new LoginRes(req.getEmail(), token, search.getType()));
+            return ResponseEntity.ok(new LoginRes(req.getUsername(), token, search.getType(), search.getId()));
         } catch (UserNotFoundException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(new ErrorRes(HttpStatus.BAD_REQUEST, e.getMessage()));

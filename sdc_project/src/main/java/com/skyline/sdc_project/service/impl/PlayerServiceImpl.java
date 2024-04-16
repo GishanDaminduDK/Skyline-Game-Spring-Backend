@@ -4,7 +4,7 @@ import com.google.gson.JsonSyntaxException;
 import com.skyline.sdc_project.dto.PlayerDTO;
 import com.skyline.sdc_project.entity.Player;
 import com.skyline.sdc_project.exception.UserNotFoundException;
-import com.skyline.sdc_project.repository.playerRepo;
+import com.skyline.sdc_project.repository.PlayerRepo;
 import com.skyline.sdc_project.service.PlayerService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,16 +13,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class PlayerServiceImpl implements PlayerService {
 
-    private final playerRepo repo;
+    private final PlayerRepo repo;
     private final Gson gson;
 
-    public PlayerServiceImpl(playerRepo repo, Gson gson) {
+    public PlayerServiceImpl(PlayerRepo repo, Gson gson) {
         this.repo = repo;
         this.gson = gson;
     }
@@ -45,11 +46,12 @@ public class PlayerServiceImpl implements PlayerService {
         }
     }
 
+
     @Override
-    public PlayerDTO search(String email, String password) throws UserNotFoundException {
+    public PlayerDTO search(String username, String password) throws UserNotFoundException {
         try {
-            Player playerByUsername = repo.findAdminByEmailAndPassword(email, password);
-            if (playerByUsername != null && playerByUsername.getPassword().equals(password) && playerByUsername.getEmail().equals(email)) {
+            Player playerByUsername = repo.findAdminByUsernameAndPassword(username, password);
+            if (playerByUsername != null && playerByUsername.getPassword().equals(password) && playerByUsername.getUsername().equals(username)) {
                 ArrayList<String> list = gson.fromJson(playerByUsername.getType(), new TypeToken<ArrayList<String>>() {}.getType());
                 String[] objects = new String[list.size()];
                 for (int i = 0; i < list.size(); i++) {

@@ -1,16 +1,18 @@
-package com.skyline.sdc_project.entity;
+package com.skyline.sdc_project.dto;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import jakarta.persistence.Id;
+import java.util.ArrayList;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerAnswers {
+public class PlayerAnswersDTO {
     @Id
     private int id;
     private String answers_array;

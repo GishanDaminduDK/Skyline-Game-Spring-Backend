@@ -4,8 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface playerRepo extends CrudRepository<Player, Integer> {
+public interface PlayerRepo extends CrudRepository<Player, Integer> {
     public Player findAdminByUsername(String username);
-    public Player findAdminByEmailAndPassword(String email, String password);
+    public Player findAdminByUsernameAndPassword(String username, String password);
 
 }
