@@ -48,11 +48,11 @@ public class SecurityConfig {
                             .requestMatchers("/search").hasAnyAuthority("ADMIN", "MANAGER")
                             //.requestMatchers(HttpMethod.POST, "/api/v1/player/savePlayer").permitAll()//.authenticated()
                             .requestMatchers(HttpMethod.POST, "/api/v1/player/savePlayer").permitAll()//
-                            .requestMatchers(HttpMethod.POST, "/api/v1/player/saveAnswers").permitAll()//
+                            //.requestMatchers(HttpMethod.POST, "/api/v1/player/saveAnswers").permitAll()//
                             .requestMatchers(HttpMethod.POST, "/api/v1/player/send_credentials").permitAll()//
 
-                            //.anyRequest().authenticated();
-                            .anyRequest().permitAll();
+                            .anyRequest().authenticated();
+                            //.anyRequest().permitAll();
                 })
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
