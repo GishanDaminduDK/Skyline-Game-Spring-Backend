@@ -193,5 +193,17 @@ INSERT INTO que_ans_bank (que) VALUES ('[
   }
 ]');
 ```
+### Accessing Unity Game Assets and WebGL Folder
+
+To access the Unity game assets and the WebGL folder, please follow these steps:
+
+1. Click on the following link to navigate to the Google Drive folder: [Unity-Skyline Google Drive Folder](https://drive.google.com/drive/folders/1olw6CrxPunjNhX0ZcM8SPQg6ZJvRPTdt)
+
+2. Once you're in the folder, you'll find the necessary assets and the WebGL folder required for the Unity-Skyline project.
+
+Feel free to explore the contents and utilize them for your Unity game development.
+
+If you have any questions or need further assistance, please don't hesitate to reach out. Happy gaming!
+
 
 
