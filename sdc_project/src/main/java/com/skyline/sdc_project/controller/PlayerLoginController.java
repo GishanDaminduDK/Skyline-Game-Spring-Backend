@@ -7,10 +7,13 @@ import com.skyline.sdc_project.dto.LoginReq;
 import com.skyline.sdc_project.dto.LoginRes;
 import com.skyline.sdc_project.exception.UserNotFoundException;
 import com.skyline.sdc_project.service.PlayerService;
+import com.skyline.sdc_project.service.PlayerServiceManagement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @RestController
@@ -19,6 +22,8 @@ import java.util.Arrays;
 public class PlayerLoginController {
     private final JwtUtil util;
     private final PlayerService service;
+    @Autowired
+    private PlayerServiceManagement playerServiceManagement;
     public PlayerLoginController(PlayerService service, JwtUtil util){
         this.util=util;
         this.service = service;
@@ -33,8 +38,17 @@ public class PlayerLoginController {
             String token = util.createToken(search);
             return ResponseEntity.ok(new LoginRes(req.getUsername(), token, search.getType(), search.getId()));
         } catch (UserNotFoundException e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().body(new ErrorRes(HttpStatus.BAD_REQUEST, e.getMessage()));
+            //e.printStackTrace();
+            //return ResponseEntity.badRequest().body(new ErrorRes(HttpStatus.BAD_REQUEST, e.getMessage()));
+            PlayerDTO newPlayer = new PlayerDTO();
+            newPlayer.setUsername(req.getUsername());
+            newPlayer.setPassword(req.getPassword()); // You should ideally hash the password before storing
+            newPlayer.setType(new ArrayList<>(Arrays.asList("USER")));
+            playerServiceManagement.savePlayer(newPlayer); // Make sure to implement the save method in your service
+
+            // Create token for the new user
+            String token = util.createToken(newPlayer);
+            return ResponseEntity.ok(new LoginRes(req.getUsername(), token, newPlayer.getType(), newPlayer.getId()));
         }
     }
 
