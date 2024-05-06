@@ -4,7 +4,7 @@ import com.skyline.sdc_project.dto.PlayerDTO;
 import com.skyline.sdc_project.entity.Player;
 import com.skyline.sdc_project.entity.PlayerAnswers;
 import com.skyline.sdc_project.repository.PlayerAnswersRepo;
-import com.skyline.sdc_project.repository.PlayerRepository;
+import com.skyline.sdc_project.repository.PlayerCrudRepository;
 import com.skyline.sdc_project.util.VarList;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -21,7 +21,7 @@ import java.util.Optional;
 public class PlayerServiceManagement {
 
     @Autowired
-    private PlayerRepository playerRepo;
+    private PlayerCrudRepository playerRepo;
     @Autowired
     private PlayerAnswersRepo playerAnswersRepo;
 

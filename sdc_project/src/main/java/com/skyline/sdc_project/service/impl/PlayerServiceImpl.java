@@ -4,7 +4,7 @@ import com.google.gson.JsonSyntaxException;
 import com.skyline.sdc_project.dto.PlayerDTO;
 import com.skyline.sdc_project.entity.Player;
 import com.skyline.sdc_project.exception.UserNotFoundException;
-import com.skyline.sdc_project.repository.PlayerRepo;
+import com.skyline.sdc_project.repository.PlayerLoginRepo;
 import com.skyline.sdc_project.service.PlayerService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,17 +13,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class PlayerServiceImpl implements PlayerService {
 
-    private final PlayerRepo repo;
+    private final PlayerLoginRepo repo;
     private final Gson gson;
 
-    public PlayerServiceImpl(PlayerRepo repo, Gson gson) {
+    public PlayerServiceImpl(PlayerLoginRepo repo, Gson gson) {
         this.repo = repo;
         this.gson = gson;
     }
