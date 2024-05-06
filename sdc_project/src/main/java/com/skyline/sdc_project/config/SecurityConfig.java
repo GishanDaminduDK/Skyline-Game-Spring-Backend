@@ -46,8 +46,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> {
                     request.requestMatchers("/api/v1/player/log").permitAll()
                             .requestMatchers("/search").hasAnyAuthority("ADMIN", "MANAGER")
-                            //.requestMatchers(HttpMethod.POST, "/api/v1/player/savePlayer").permitAll()//
-                            .requestMatchers(HttpMethod.POST, "/api/v1/player/savePlayer").authenticated()//
+                            .requestMatchers(HttpMethod.POST, "/api/v1/player/savePlayer").permitAll()//
+                            //.requestMatchers(HttpMethod.POST, "/api/v1/player/savePlayer").authenticated()//
                             .requestMatchers(HttpMethod.POST, "/api/v1/player/saveAnswers").permitAll()//
                             .requestMatchers(HttpMethod.POST, "/api/v1/player/send_credentials").permitAll()//
                             .anyRequest().permitAll();

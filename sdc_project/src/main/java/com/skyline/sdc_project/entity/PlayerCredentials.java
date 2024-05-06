@@ -1,6 +1,6 @@
 package com.skyline.sdc_project.entity;
 
-public class Usercredentials {
+public class PlayerCredentials {
     private String username;
     private String password;
 

@@ -1,26 +1,21 @@
 package com.skyline.sdc_project.entity;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class que_ans_bank {
+@Table(name = "que_ans_bank")
+public class QueAnsBank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "TEXT")
     private String que;
-
-    public que_ans_bank() {
-    }
-
-    public que_ans_bank(Long id, String que) {
-        this.id = id;
-        this.que = que;
-    }
 
     // Getters and setters
     public Long getId() {
