@@ -1,7 +1,7 @@
 # Spring_bc_skyline
  sdc_project_semester_06
 
- <br>**For player username and password, please use  player username and player API key to store their credentials inside of the database.**
+ <br>**For player username and password, please use  player username and player API key to store their credentials inside of the database. Every player's username and password must be saved by admistration team of game**
  <br> To save player details use this POST API, http://localhost:8081/api/v1/player/savePlayer
 <br> Example request body,
 ```bash
