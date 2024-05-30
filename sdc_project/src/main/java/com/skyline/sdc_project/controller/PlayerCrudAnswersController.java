@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:5173") // Allow requests from localhost:5173
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173") // Allow requests from localhost:5173
+//@CrossOrigin(origins = "*")
 @RequestMapping("api/v1/player")
 public class PlayerCrudAnswersController {
 

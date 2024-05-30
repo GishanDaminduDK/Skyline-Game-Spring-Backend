@@ -15,5 +15,6 @@ import lombok.NoArgsConstructor;
 public class PlayerAnswersDTO {
     private int id;
     private String answersArray;
+    private int totalCoins;
 
 }

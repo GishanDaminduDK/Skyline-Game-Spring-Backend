@@ -12,5 +12,6 @@ public class PlayerAnswers {
     @Id
     private int id;
     private String answersArray;
+    private int totalCoins;
 
 }
