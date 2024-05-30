@@ -1,10 +1,8 @@
 package com.skyline.sdc_project.entity;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.Id;
 
 @Entity
 @Data
@@ -13,5 +11,6 @@ import jakarta.persistence.Id;
 public class PlayerAnswers {
     @Id
     private int id;
-    private String answers_array;
+    private String answersArray;
+
 }

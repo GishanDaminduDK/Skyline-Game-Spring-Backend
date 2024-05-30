@@ -5,7 +5,7 @@ import com.skyline.sdc_project.dto.PlayerDTO;
 import com.skyline.sdc_project.entity.Player;
 import com.skyline.sdc_project.exception.UserNotFoundException;
 import com.skyline.sdc_project.repository.PlayerLoginRepo;
-import com.skyline.sdc_project.service.PlayerService;
+import com.skyline.sdc_project.service.PlayerLoginService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.security.core.userdetails.User;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class PlayerServiceImpl implements PlayerService {
+public class PlayerServiceImpl implements PlayerLoginService {
 
     private final PlayerLoginRepo repo;
     private final Gson gson;

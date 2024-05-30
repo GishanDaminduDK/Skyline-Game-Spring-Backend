@@ -2,14 +2,12 @@ package com.skyline.sdc_project.controller;
 
 import com.skyline.sdc_project.config.JwtUtil;
 import com.skyline.sdc_project.dto.PlayerDTO;
-import com.skyline.sdc_project.dto.ErrorRes;
 import com.skyline.sdc_project.dto.LoginReq;
 import com.skyline.sdc_project.dto.LoginRes;
 import com.skyline.sdc_project.exception.UserNotFoundException;
-import com.skyline.sdc_project.service.PlayerService;
-import com.skyline.sdc_project.service.PlayerServiceManagement;
+import com.skyline.sdc_project.service.PlayerLoginService;
+import com.skyline.sdc_project.service.PlayerManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,10 +19,10 @@ import java.util.Arrays;
 @CrossOrigin
 public class PlayerLoginController {
     private final JwtUtil util;
-    private final PlayerService service;
+    private final PlayerLoginService service;
     @Autowired
-    private PlayerServiceManagement playerServiceManagement;
-    public PlayerLoginController(PlayerService service, JwtUtil util){
+    private PlayerManagementService playerServiceManagement;
+    public PlayerLoginController(PlayerLoginService service, JwtUtil util){
         this.util=util;
         this.service = service;
         System.out.println("LoginAPI");

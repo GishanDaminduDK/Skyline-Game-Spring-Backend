@@ -7,10 +7,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -22,24 +28,23 @@ public class PlayerStatusSaveonAPI {
     private int id;
     private int coins;
     private int gems;
+    private LocalDateTime enterTime;
+    private LocalDateTime exitTime;
+
 
     @ElementCollection
-    @CollectionTable(name = "player_trees")
-    @Column(name = "tree")
-    private ArrayList<String> trees;
+    @CollectionTable(name = "player_resources")
+    @Column(name = "resource")
+    private Set<String> resources = new HashSet<>();
 
-    @ElementCollection
-    @CollectionTable(name = "player_houses")
-    @Column(name = "house")
-    private ArrayList<String> houses;
+    @PrePersist
+    protected void onCreate() {
+        enterTime = LocalDateTime.now();
+        exitTime = LocalDateTime.now();
+    }
 
-    @ElementCollection
-    @CollectionTable(name = "player_solar_pannels")
-    @Column(name = "solar_pannel")
-    private ArrayList<String> solarPannels;
-
-    @ElementCollection
-    @CollectionTable(name = "player_colors_of_environment")
-    @Column(name = "color_of_environment")
-    private ArrayList<String> colorsOfEnvironment;
+    @PreUpdate
+    protected void onUpdate() {
+        exitTime = LocalDateTime.now();
+    }
 }

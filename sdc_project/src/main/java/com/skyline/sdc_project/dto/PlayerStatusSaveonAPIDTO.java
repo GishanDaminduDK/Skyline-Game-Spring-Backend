@@ -2,17 +2,16 @@ package com.skyline.sdc_project.dto;
 
 import lombok.Data;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.HashSet; // For initialization
 
 @Data
 public class PlayerStatusSaveonAPIDTO {
     private int id;
     private int coins;
     private int gems;
-
-    private ArrayList<String> trees;
-    private ArrayList<String> houses;
-
-    private ArrayList<String> solarPannels;
-    private ArrayList<String> colorsOfEnvironment;
+    private LocalDateTime enterTime;
+    private LocalDateTime exitTime;
+    private Set<String> resources = new HashSet<>();
 }

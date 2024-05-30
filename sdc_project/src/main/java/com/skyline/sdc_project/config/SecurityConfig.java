@@ -1,5 +1,5 @@
 package com.skyline.sdc_project.config;
-import com.skyline.sdc_project.service.PlayerService;
+import com.skyline.sdc_project.service.PlayerLoginService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,9 +14,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
-    private final PlayerService playerService;
+    private final PlayerLoginService playerService;
 
-    public SecurityConfig(PlayerService playerService, JwtAuthorizationFilter jwtAuthorizationFilter) {
+    public SecurityConfig(PlayerLoginService playerService, JwtAuthorizationFilter jwtAuthorizationFilter) {
         this.playerService = playerService;
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
 

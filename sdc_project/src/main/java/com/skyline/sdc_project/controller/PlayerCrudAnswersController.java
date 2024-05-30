@@ -6,7 +6,7 @@ import com.skyline.sdc_project.dto.PlayerDTO;
 import com.skyline.sdc_project.dto.ResponseDTO;
 
 import com.skyline.sdc_project.entity.PlayerCredentials;
-import com.skyline.sdc_project.service.PlayerServiceManagement;
+import com.skyline.sdc_project.service.PlayerManagementService;
 import com.skyline.sdc_project.util.VarList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ import java.util.List;
 public class PlayerCrudAnswersController {
 
     @Autowired
-    private PlayerServiceManagement playerServiceManagement;
+    private PlayerManagementService playerServiceManagement;
 
     @Autowired
     private ResponseDTO responseDTO;
