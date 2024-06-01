@@ -1,14 +1,6 @@
 package com.skyline.sdc_project.entity;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class PlayerStatusSaveonAPI {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int coins;
     private int gems;
@@ -47,4 +39,43 @@ public class PlayerStatusSaveonAPI {
     protected void onUpdate() {
         exitTime = LocalDateTime.now();
     }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "player_answers_id", referencedColumnName = "id")
+    private PlayerAnswers playerAnswers;
 }
+//package com.skyline.sdc_project.entity;
+//
+//import jakarta.persistence.*;
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//import java.time.LocalDateTime;
+//
+//@Entity
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+//public class PlayerStatusSaveonAPI {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
+//    private int coins;
+//    private int gems;
+//    private LocalDateTime enterTime;
+//    private LocalDateTime exitTime;
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "player_answers_id", referencedColumnName = "id")
+//    private PlayerAnswers playerAnswers;
+//
+//    @PrePersist
+//    @PreUpdate
+//    private void synchronizeIds() {
+//        if (playerAnswers == null) {
+//            playerAnswers = new PlayerAnswers();
+//        }
+//        playerAnswers.setId(this.id);
+//    }
+//}
+//

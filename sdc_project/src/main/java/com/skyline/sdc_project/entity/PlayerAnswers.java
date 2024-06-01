@@ -10,8 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PlayerAnswers {
     @Id
-    private int id;
-    private String answersArray;
-    private int totalCoins;
 
+    private int id;
+
+    private String answersArray;  // Assuming this is a JSON or serialized string.
+    private int totalCoins;  // Stores total coins.
+
+    @OneToOne(mappedBy = "playerAnswers", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private PlayerStatusSaveonAPI playerStatus;  // Bidirectional one-to-one relationship with PlayerStatus.
+
+    // The Getters and Setters are provided by @Data annotation from Lombok.
 }

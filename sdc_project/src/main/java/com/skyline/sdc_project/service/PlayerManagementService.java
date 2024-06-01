@@ -22,8 +22,7 @@ public class PlayerManagementService {
 
     @Autowired
     private PlayerManagementRepo playerRepo;
-    @Autowired
-    private PlayerAnswersRepo playerAnswersRepo;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -36,29 +35,7 @@ public class PlayerManagementService {
             return VarList.RSP_SUCCESS;
         }
     }
-    public String savePlayerAnswers(PlayerAnswersDTO playerAnswersDTO){
-        if (playerAnswersRepo.existsById(playerAnswersDTO.getId())){
-            return VarList.RSP_DUPLICATED;
-        } else {
-            playerAnswersRepo.save(modelMapper.map(playerAnswersDTO, PlayerAnswers.class));
-            return VarList.RSP_SUCCESS;
-        }
-    }
-    public PlayerAnswersDTO getPlayerAnswers(Integer playerId) {
-        try {
-            Optional<PlayerAnswers> playerAnswersOptional = playerAnswersRepo.findById(playerId);
-            if (playerAnswersOptional.isPresent()) {
-                PlayerAnswers playerAnswers = playerAnswersOptional.get();
-                return modelMapper.map(playerAnswers, PlayerAnswersDTO.class);
-            } else {
-                return null; // Or throw an exception, depending on your design
-            }
-        } catch (Exception ex) {
-            // Handle exceptions, log or rethrow if necessary
-            ex.printStackTrace();
-            return null; // or return appropriate error code/message
-        }
-    }
+
 
     public String updatePlayer(PlayerDTO playerDTO){
         if (playerRepo.existsById(playerDTO.getId())){
